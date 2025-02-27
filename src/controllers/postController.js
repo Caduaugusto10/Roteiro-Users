@@ -21,11 +21,11 @@ const routerP = {
 
     addPost: (req, res) => {
         try {
-        const {comment} = req.body;
-        if (!comment) {
-            throw new Error("O campo comment é obrigatório");
+        const { comment, like } = req.body;
+        if (!comment || !like === undefined) {
+            throw new Error("O campo comment e o like são obrigatórios");
         }
-        const newPost = new Post(comment);
+        const newPost = new Post(comment, like);
         lista.addPost(newPost);
         res.status(201).json(newPost);
         } catch (error) {
